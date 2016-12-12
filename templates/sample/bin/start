@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+#set -x # for debugging
+
+DEBUG=""
+NODE_DEBUG=""
+NODE_ENV="local"
+
+while test $# -gt 0; do
+    case "$1" in
+        -h|--help)
+            echo "Start the node server using nodemon"
+            echo " "
+            echo "The default environment is 'local' if no flags are passed."
+            echo " "
+            echo "options:"
+            echo "-h| --help        show help"
+            echo "-d|--debug        start with --debug flag"
+            echo "-n|--node-debug   start with node debug"
+            echo "                      local code, staging data"
+            exit 0
+            ;;
+        -d|--debug)
+            shift
+            DEBUG="debug"
+            ;;
+        -n|node-debug)
+            shift
+            NODE_DEBUG=true
+            DEBUG="debug"
+            ;;
+        *)
+            break
+            ;;
+    esac
+done
+
+(NODE_ENV="$NODE_ENV" ./bin/watchify)&
+
+if [ -z "$DEBUG" ]
+then
+    if ! command -v nodemon >/dev/null 2>&1
+    then
+        npm install -g nodemon
+    fi
+    (NODE_ENV="$NODE_ENV" nodemon -V app)
+    #sleep 5
+    #mocha test/rest-api --recursive --watch
+else
+    if [ -n "$NODE_DEBUG" ]
+    then
+        NODE_ENV="$NODE_ENV" node-debug app
+    else
+        NODE_ENV="$NODE_ENV" node --debug app
+    fi
+fi

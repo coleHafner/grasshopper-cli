@@ -1,0 +1,9 @@
+{
+    "paths": {
+        "root": "/"
+    },
+    "authTokenLifeSpan": "8h",
+    "cookies": {
+        "authTokenName": "authToken"
+    }
+}

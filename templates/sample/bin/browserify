@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+browserify -g uglifyify -t pugify -t uglifyify app/main.js -o app/public/js/bundle.js

@@ -1,5 +1,18 @@
-module.exports = function(ObjectID) {
+module.exports = function(ObjectID, config) {
     'use strict';
+    var CryptoJS = require('crypto-js'),
+        salt = '225384010328',
+        password = 'TestPassword';
+
+    if (
+        typeof config !== 'undefined' &&
+        typeof config.admin !== 'undefined' &&
+        typeof config.admin.password !== 'undefined'
+    ) {
+        password = config.admin.password;
+    }
+
+    var hash = CryptoJS.HmacSHA256(password, salt).toString();
 
     return [
         {
@@ -8,16 +21,16 @@ module.exports = function(ObjectID) {
             enabled: true,
             firstname: 'Test',
             lastname: 'User',
-            identities: {
-                basic: {
-                    username: 'admin',
-                    salt: '225384010328',
-                    hash: '885f59a76ea44e1d264f9da45ca83574fbe55e3e7e6c51afe681730b45c7bb03'
-                }
-            },
             displayName : 'admin',
             linkedIdentities : ['basic'],
-            email: 'email@email.com'
+            email: 'email@email.com',
+            identities: {
+                basic: {
+                    username: config.admin.username,
+                    salt: salt,
+                    hash: hash
+                }
+            }
         }
     ];
 };

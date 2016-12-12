@@ -1,0 +1,20 @@
+[
+    [
+        "use",
+        "/api",
+        ["api.middleware"]
+    ],
+    [
+        "use",
+        "/admin",
+        ["admin.middleware"]
+    ],
+    [
+        "use",
+        "/",
+        ["log.middleware",
+            "cookieParser.middleware",
+            "extendResLocals.middleware"
+        ]
+    ]
+]

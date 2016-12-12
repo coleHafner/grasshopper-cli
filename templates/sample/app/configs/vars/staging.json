@@ -1,0 +1,41 @@
+{
+    "admin": {
+        "username": "",
+        "password": ""
+    },
+    "aws": {
+        "accessKeyId": "",
+        "bucket": "",
+        "region": "",
+        "secretAccessKey": "",
+        "urlbase": ""
+    },
+    "db": {
+        "endpoint": "",
+        "host": "",
+        "name": "",
+        "username": "",
+        "password": ""
+    },
+    "mandrill" : {
+        "apiKey": "",
+        "subAccount": "",
+        "to": "",
+        "from": ""
+    },
+    "googleApis": {
+        "private_key": "",
+        "client_email": "",
+        "scope": "",
+        "impersonate_email": ""
+    },
+    "projectIsInAppDir": true,
+    "useSassMiddleware": true,
+    "debug": false,
+    "optimize": false,
+    "port": 3008,
+    "verbose": true,
+    "protocol": "http",
+    "domain": "localhost",
+    "cookieDomain": "localhost"
+}
